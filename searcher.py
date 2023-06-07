@@ -4,6 +4,7 @@ from whoosh.fields import Schema
 from whoosh.index import create_in, open_dir, FileIndex
 from whoosh.writing import AsyncWriter
 from flask import current_app
+from flask_sqlalchemy.model import Model
 
 
 class WhooshSearcher:
@@ -30,13 +31,15 @@ class WhooshSearcher:
         writer.commit()
         return ix
 
-    def get_index(self, obj) -> FileIndex:
+    def get_index(self, obj: Model) -> FileIndex:
+        """Gets the index for the given object, creating one if it does not exist already."""
         if self._check_index_exists(name := obj.__tablename__):
             return open_dir(os.path.join(self._index_path, name))
         else:
             return self._create_index(name, obj.__searchable__)
 
-    def add_to_index(self, obj):
+    def add_to_index(self, obj: Model):
+        """Adds a database object to the index"""
         ix = self.get_index(obj)
         writer = AsyncWriter(ix)
         vals = {}
@@ -46,7 +49,8 @@ class WhooshSearcher:
         writer.update_document(**vals)
         writer.commit()
 
-    def remove_from_index(self, obj):
+    def remove_from_index(self, obj: Model):
+        """Removes a database object from the index"""
         ix = self.get_index(obj)
         writer = AsyncWriter(ix)
         writer.delete_by_term("id", obj.id)
