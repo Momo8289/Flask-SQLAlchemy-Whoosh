@@ -3,7 +3,7 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "flask-sqlalchemy-whoosh"
+name = "Flask-SQLalchemy-Whoosh"
 version = "0.0.1"
 authors = [
   { name="Nick" },
