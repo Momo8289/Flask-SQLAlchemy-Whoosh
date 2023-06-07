@@ -4,18 +4,19 @@ from whoosh.fields import Schema
 from whoosh.index import create_in, open_dir, FileIndex
 from whoosh.writing import AsyncWriter
 from flask_sqlalchemy.model import Model
+from flask import Flask
 
 
 class WhooshSearcher:
-    def __init__(self, app):
+    def __init__(self, app: Flask):
         if app is not None:
             self.init_app(app)
         
 
-    def init_app(self, app):
+    def init_app(self, app: Flask):
         self._index_path = app.config.get("WHOOSH_INDEX_PATH") or "./whoosh"
 
-    def _check_index_exists(self, name):
+    def _check_index_exists(self, name: str):
         return os.path.exists(os.path.join(self._index_path, name))
 
     def _create_index(self, name: str, searchables: dict):
