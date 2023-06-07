@@ -1,7 +1,7 @@
 import os
 
 from whoosh.fields import Schema
-from whoosh.index import create_in, open_dir
+from whoosh.index import create_in, open_dir, FileIndex
 from whoosh.writing import AsyncWriter
 
 
@@ -14,7 +14,7 @@ class WhooshSearcher:
 
     def _create_index(self, name: str, searchables: dict):
         schema = Schema()
-        os.mkdir(self._index_path+name)
+        os.mkdir(os.path.join(self._index_path, name))
         ix = create_in(os.path.join(self._index_path, name), schema)
         writer = AsyncWriter(ix)
         for field_name, type in searchables.items():
@@ -22,7 +22,7 @@ class WhooshSearcher:
         writer.commit()
         return ix
 
-    def get_index(self, obj):
+    def get_index(self, obj) -> FileIndex:
         if self._check_index_exists(name := obj.__tablename__):
             return open_dir(os.path.join(self._index_path, name))
         else:
