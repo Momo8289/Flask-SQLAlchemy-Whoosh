@@ -13,7 +13,7 @@ class WhooshSearcher:
         
 
     def init_app(self, app):
-        self._index_path = app.config["WHOOSH_INDEX_PATH"] or "./whoosh"
+        self._index_path = app.config.get("WHOOSH_INDEX_PATH") or "./whoosh"
 
     def _check_index_exists(self, name):
         return os.path.exists(os.path.join(self._index_path, name))

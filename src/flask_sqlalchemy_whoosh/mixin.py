@@ -26,10 +26,8 @@ class SearchableMixin():
 
             if total == 0:
                 return cls.query.filter(sqlalchemy.sql.false()), 0
-            when = []
-            for i in range(len(ids)):
-                when.append((ids[i], i))
-
+            
+            when = {ids[i]: i for i in range(len(ids))}
             query = (cls.query.filter(cls.id.in_(ids)).order_by(
                 cls.db.case(when, value=cls.id)), total)
             return query
