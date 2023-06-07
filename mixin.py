@@ -1,4 +1,3 @@
-from whoosh.fields import TEXT, ID, KEYWORD
 from whoosh.qparser import QueryParser
 import sqlalchemy.sql
 from flask_sqlalchemy import SQLAlchemy
