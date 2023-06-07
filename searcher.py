@@ -3,11 +3,18 @@ import os
 from whoosh.fields import Schema
 from whoosh.index import create_in, open_dir, FileIndex
 from whoosh.writing import AsyncWriter
+from flask import current_app
 
 
 class WhooshSearcher:
     def __init__(self, app):
+        if app is not None:
+            self.init_app(app)
+        
+
+    def init_app(self, app):
         self._index_path = app.config["WHOOSH_INDEX_PATH"]
+
 
     def _check_index_exists(self, name):
         return os.path.exists(os.path.join(self._index_path, name))
@@ -15,6 +22,7 @@ class WhooshSearcher:
     def _create_index(self, name: str, searchables: dict):
         schema = Schema()
         os.mkdir(os.path.join(self._index_path, name))
+        # Create the search index
         ix = create_in(os.path.join(self._index_path, name), schema)
         writer = AsyncWriter(ix)
         for field_name, type in searchables.items():
