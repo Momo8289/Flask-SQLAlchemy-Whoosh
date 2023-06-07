@@ -13,8 +13,8 @@ class WhooshSearcher:
             self.init_app(app)
         
 
-    def init_app(self, app: Flask):
-        self._index_path = app.config.get("WHOOSH_INDEX_PATH") or "./whoosh"
+    def init_app(self, app: Flask, index_path="./whoosh"):
+        self._index_path = app.config.get("WHOOSH_INDEX_PATH") or index_path
 
     def _check_index_exists(self, name: str):
         return os.path.exists(os.path.join(self._index_path, name))
