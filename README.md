@@ -4,6 +4,20 @@ A simple and easy to use Flask extension to add full text search to your SQLAlch
 ### Installing
 `$ pip install Flask-SQLAlchemy-Whoosh`
 
+### Setup
+```python
+from flask import Flask
+from flask_sqlalchemy import SQLAlchemy
+from flask_sqlalchemy_whoosh.searcher import WhooshSearcher
+from flask_sqlalchemy_whoosh.mixin import SearchableMixin
+
+app = Flask(__name__)
+db = SQLAlchemy(app)
+search = WhooshSearcher(app)
+# If you want to use the SearchableMixin
+SearchableMixin.init_search(search, db)
+```
+
 ### Example
 ```python
 from flask import Flask
@@ -16,8 +30,6 @@ from whoosh.fields import ID, TEXT, NUMERIC
 app = Flask(__name__)
 db = SQLAlchemy(app)
 search = WhooshSearcher(app)
-
-# If you want to use the SearchableMixin
 SearchableMixin.init_search(search, db)
 
 
