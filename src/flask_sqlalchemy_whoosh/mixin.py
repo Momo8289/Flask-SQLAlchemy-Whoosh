@@ -1,6 +1,7 @@
 from whoosh.qparser import QueryParser
 import sqlalchemy.sql
 from flask_sqlalchemy import SQLAlchemy
+from flask_sqlalchemy.query import Query
 
 from .searcher import WhooshSearcher
 
@@ -15,7 +16,7 @@ class SearchableMixin():
         cls.db.event.listen(db.session, 'after_commit', cls.after_commit)
 
     @classmethod
-    def search(cls, field, term, page, per_page=20):
+    def search(cls, field: str, term: str, page: int=1, per_page: int=20) -> tuple(Query, int):
         ix = cls.searcher.get_index(cls)
         with ix.searcher() as searcher:
             parser = QueryParser(field, ix.schema)
