@@ -38,5 +38,11 @@ class Product(SearchableMixin, db.Model):
     desc = db.Column(db.String),
     price = db.Column(db.Integer)
 
+# Use the search method to search a table
+results, total = Product.search("name", "nails", 1)
+
+
 ```
+
+
 
