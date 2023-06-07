@@ -3,7 +3,6 @@ import os
 from whoosh.fields import Schema
 from whoosh.index import create_in, open_dir, FileIndex
 from whoosh.writing import AsyncWriter
-from flask import current_app
 from flask_sqlalchemy.model import Model
 
 
@@ -14,7 +13,7 @@ class WhooshSearcher:
         
 
     def init_app(self, app):
-        self._index_path = app.config["WHOOSH_INDEX_PATH"]
+        self._index_path = app.config["WHOOSH_INDEX_PATH"] or "./whoosh"
 
 
     def _check_index_exists(self, name):
