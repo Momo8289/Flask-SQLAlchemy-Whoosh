@@ -16,6 +16,10 @@ classifiers = [
     "Operating System :: OS Independent",
     "Framework :: Flask",
 ]
+dependencies = [
+    "Flask-SQLAlchemy>=3.0.3",
+    "Whoosh>=2.7.4"
+]
 
 [project.urls]
 "Homepage" = "https://github.com/Momo8289/Flask-SQLAlchemy-Whoosh"
