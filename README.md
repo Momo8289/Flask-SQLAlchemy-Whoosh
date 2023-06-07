@@ -4,7 +4,7 @@ A simple and easy to use Flask extension to add full text search to your SQLAlch
 ### Installing
 `$ pip install Flask-SQLAlchemy-Whoosh`
 
-### Setup
+### Example
 ```python
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
