@@ -8,8 +8,8 @@ A simple and easy to use Flask extension to add full text search to your SQLAlch
 ```python
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-from flask_sqlalchemy_whoosh.searcher import WhooshSearcher
-from flask_sqlalchemy_whoosh.mixin import SearchableMixin
+from Flask_SQLalchemy_Whoosh.searcher import WhooshSearcher
+from Flask_SQLalchemy_Whoosh.mixin import SearchableMixin
 
 app = Flask(__name__)
 db = SQLAlchemy(app)
@@ -25,8 +25,8 @@ You can find some documentation [here](https://github.com/Momo8289/Flask-SQLAlch
 ```python
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-from flask_sqlalchemy_whoosh.searcher import WhooshSearcher
-from flask_sqlalchemy_whoosh.mixin import SearchableMixin
+from Flask_SQLalchemy_Whoosh.searcher import WhooshSearcher
+from Flask_SQLalchemy_Whoosh.mixin import SearchableMixin
 from whoosh.fields import ID, TEXT, NUMERIC
 
 
