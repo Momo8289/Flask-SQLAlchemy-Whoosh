@@ -40,7 +40,7 @@ class Product(SearchableMixin, db.Model):
 
 
 # If you want to index a table that  already has entries, use the reindex method
-# It index all entries in the table
+# It will index all entries in the table
 Product.reindex()
 
 # Use the search method to search a table
