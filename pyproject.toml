@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "Flask-SQLalchemy-Whoosh"
-version = "0.0.1"
+version = "0.1.0"
 authors = [
   { name="Nick" },
 ]
@@ -24,3 +24,4 @@ dependencies = [
 [project.urls]
 "Homepage" = "https://github.com/Momo8289/Flask-SQLAlchemy-Whoosh"
 "Bug Tracker" = "https://github.com/Momo8289/Flask-SQLAlchemy-Whoosh/issues"
+"Documentation" = "https://github.com/Momo8289/Flask-SQLAlchemy-Whoosh/wiki/Docs"
