@@ -38,10 +38,13 @@ class Product(SearchableMixin, db.Model):
     desc = db.Column(db.String),
     price = db.Column(db.Integer)
 
+
+# If you want to index a table that  already has entries, use the reindex method
+# It index all entries in the table
+Product.reindex()
+
 # Use the search method to search a table
 results, total = Product.search("name", "nails", 1)
-
-
 ```
 
 
