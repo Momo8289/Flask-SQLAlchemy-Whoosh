@@ -16,12 +16,20 @@ class SearchableMixin():
         cls.db.event.listen(db.session, 'after_commit', cls.after_commit)
 
     @classmethod
-    def search(cls, field: str, term: str, page: int=1, per_page: int=20) -> tuple[Query, int]:
+    def search(cls, field: str, term: str, **kwargs) -> tuple[Query, int]:
+        paged = kwargs.get("paged", False)
+        page = kwargs.get("page", 1)
+        per_page = kwargs.get("per_page", 10)
+        limit = kwargs.get("limit", None)
+
         ix = cls.searcher.get_index(cls)
         with ix.searcher() as searcher:
             parser = QueryParser(field, ix.schema)
             query = parser.parse(term)
-            results = searcher.search_page(query, page, pagelen=per_page)
+            if paged:
+                results = searcher.search_page(query, page, pagelen=per_page)
+            else:
+                results = searcher.search(query, limit=limit)
             total = len(results)
             ids = [r["id"] for r in results]
 
