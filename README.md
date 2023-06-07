@@ -18,6 +18,9 @@ search = WhooshSearcher(app)
 SearchableMixin.init_search(search, db)
 ```
 
+### Documentation
+You can find some documentation [here](https://github.com/Momo8289/Flask-SQLAlchemy-Whoosh/wiki/Docs)
+
 ### Example
 ```python
 from flask import Flask
