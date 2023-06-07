@@ -10,12 +10,12 @@ class WhooshSearcher:
         self._index_path = app.config["WHOOSH_INDEX_PATH"]
 
     def _check_index_exists(self, name):
-        return os.path.exists(self._index_path + name)
+        return os.path.exists(os.path.join(self._index_path, name))
 
     def _create_index(self, name: str, searchables: dict):
         schema = Schema()
         os.mkdir(self._index_path+name)
-        ix = create_in(self._index_path + name, schema)
+        ix = create_in(os.path.join(self._index_path, name), schema)
         writer = AsyncWriter(ix)
         for field_name, type in searchables.items():
             writer.add_field(field_name, type)
@@ -24,7 +24,7 @@ class WhooshSearcher:
 
     def get_index(self, obj):
         if self._check_index_exists(name := obj.__tablename__):
-            return open_dir(self._index_path + name)
+            return open_dir(os.path.join(self._index_path, name))
         else:
             return self._create_index(name, obj.__searchable__)
 
