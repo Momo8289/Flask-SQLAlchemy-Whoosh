@@ -59,7 +59,7 @@ class Product(SearchableMixin, db.Model):
 Product.reindex()
 
 # Use the search method to search a table
-results, total = Product.search("name", "nails", 1)
+results, total = Product.search("name", "nails")
 ```
 
 
