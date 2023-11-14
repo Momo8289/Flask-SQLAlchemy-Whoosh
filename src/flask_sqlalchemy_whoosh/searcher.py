@@ -8,7 +8,7 @@ from flask import Flask
 
 
 class WhooshSearcher:
-    def __init__(self, app: Flask):
+    def __init__(self, app: Flask = None):
         if app is not None:
             self.init_app(app)
         
